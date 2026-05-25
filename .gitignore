@@ -1,0 +1,79 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+python_env/
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environment secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Database
+prisma/migrations/
+*.db
+*.sqlite
+
+# ML training artifacts and backups
+ml-training/backup/
+ml-training/report_charts/
+ml-training/*.csv
+ml-training/*.json
+!ml-training/calculated_metrics.json
+!ml-training/algorithm_comparison.json
+!ml-training/training_results.json
+!ml-training/hybrid_model_metadata.json
+!ml-training/lstm_model_metadata.json
+
+# Build outputs
+dist/
+out/
+build/
+

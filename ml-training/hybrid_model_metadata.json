@@ -1,0 +1,111 @@
+{
+  "model_version": "v7_feature_selected_12month_split",
+  "model_type": "two_stage_hybrid",
+  "key_changes": [
+    "Feature selection: removed category_encoded, is_festival (permutation importance < 0.1% SMAPE)",
+    "12-month test split (was 3 months -> ~9,770 rows, now reliable)",
+    "Residual target: log1p(qty) - log1p(rolling_3m)",
+    "LSTM: 64->32->Dense(16)->Dense(1) + L2 + recurrent_dropout",
+    "RF: 100 trees, max_depth=8, min_samples_leaf=10 (constrained)"
+  ],
+  "feature_cols": [
+    "sales_velocity",
+    "lag_2",
+    "sales_trend",
+    "lag_3",
+    "lag_1",
+    "rolling_3m",
+    "rolling_3m_std"
+  ],
+  "n_features": 7,
+  "features_removed": [
+    "category_encoded",
+    "is_festival"
+  ],
+  "removal_reason": "Permutation importance: category_encoded +0.06%, is_festival -0.00%. Monthly data insufficient for festival pattern learning (only 4-5 festival months in training).",
+  "category_map": {
+    "OTHER": 12,
+    "HOUSEHOLD": 10,
+    "STATIONERY": 16,
+    "TOYS": 17,
+    "CLEANING": 5,
+    "PERSONAL_CARE": 13,
+    "SNACKS": 15,
+    "NOODLES": 11,
+    "BEVERAGES": 3,
+    "ELECTRONICS": 7,
+    "GROCERIES": 9,
+    "FASHION": 8,
+    "ALCOHOL": 0,
+    "BAKERY": 2,
+    "BABY_PRODUCTS": 1,
+    "DAIRY": 6,
+    "CIGARETTES": 4
+  },
+  "timesteps": 6,
+  "log_transform": true,
+  "target": "residual_log = log1p(quantity_sold) - log1p(rolling_3m)",
+  "inverse": "expm1(clip(pred_residual + log1p(rolling_3m), -10, 10))",
+  "stage1": {
+    "type": "Rule-Based (rolling_3m >= 0.35)",
+    "threshold": 0.35,
+    "f1": 0.9181,
+    "precision": 0.9266,
+    "recall": 0.9097
+  },
+  "stage2": {
+    "type": "Stacked LSTM + RF (residual target)",
+    "w_lstm": 1.0,
+    "w_rf": 0.0,
+    "lstm_rmse": 0.5057,
+    "lstm_smape": 1.15,
+    "rf_rmse": 5.09,
+    "rf_smape": 6.8,
+    "rf_max_depth": 8,
+    "rf_min_samples_leaf": 10,
+    "top_features": [
+      "sales_velocity",
+      "lag_2",
+      "rolling_3m_std",
+      "lag_1",
+      "sales_trend"
+    ]
+  },
+  "metrics": {
+    "rmse": 0.5519,
+    "mae": 0.1634,
+    "smape": 31.35,
+    "mape": 10.17,
+    "r2": 0.999279,
+    "f1": 0.9181,
+    "note": "All in real units. No accuracy term. 12-month test split."
+  },
+  "metrics_nz": {
+    "rmse": 0.5057,
+    "mae": 0.0794,
+    "smape": 1.15,
+    "r2": 0.999471,
+    "note": "Non-zero test rows only"
+  },
+  "data": {
+    "train_cutoff": "2026-01-01",
+    "test_months": 3,
+    "train_samples": 106626,
+    "test_samples_full": 9770,
+    "test_samples_nz": 8423,
+    "total_products": 8733,
+    "total_categories": 17,
+    "data_range": "2021-08-01 to 2026-04-01",
+    "data_months": 57,
+    "zero_pct": 34.7
+  },
+  "forecast_server_notes": [
+    "TIMESTEPS=6, n_features=7",
+    "Scale X with hybrid_scaler_reg.joblib (RobustScaler)",
+    "Sell gate: rolling_3m < 0.35 -> pred = 0",
+    "Reconstruct: pred = expm1(clip(lstm_pred + log1p(rolling_3m), -10, 10))",
+    "log_rolling_ratio = log(clip((rolling_3m+1e-6)/(rolling_6m+1e-6), 0.1, 10))",
+    "NO clamp applied -- honest evaluation"
+  ],
+  "training_date": "2026-04-26T11:37:04.794675"
+}

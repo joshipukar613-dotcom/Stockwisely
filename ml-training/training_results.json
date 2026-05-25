@@ -1,0 +1,31 @@
+{
+  "training_time_seconds": 2.343501091003418,
+  "train_mape": 43.88751964504238,
+  "train_accuracy": 56.11248035495762,
+  "test_mape": 44.92095542355429,
+  "test_accuracy": 55.07904457644571,
+  "feature_importance": {
+    "feature": {
+      "3": "rolling_3m",
+      "1": "lag_2",
+      "0": "lag_1",
+      "4": "rolling_6m",
+      "2": "lag_3",
+      "8": "category_encoded",
+      "5": "month",
+      "6": "quarter",
+      "7": "is_festival"
+    },
+    "importance": {
+      "3": 952,
+      "1": 747,
+      "0": 723,
+      "4": 48,
+      "2": 11,
+      "8": 8,
+      "5": 3,
+      "6": 0,
+      "7": 0
+    }
+  }
+}

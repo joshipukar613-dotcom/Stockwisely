@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expired Products</title>
+<style>
+  .container{max-width:800px;margin:0 auto;font-family:Arial,sans-serif;color:#333}
+  .header{background:#dc2626;color:#fff;padding:20px;text-align:center}
+  .content{background:#fff;border:1px solid #e5e7eb;border-top:none;padding:24px}
+  .list{font-size:14px;color:#444}
+  .btn{display:inline-block;background:#dc2626;color:#fff;padding:10px 16px;text-decoration:none;border-radius:6px;margin-right:8px}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>CRITICAL: {{count}} Products Expired</h1>
+    </div>
+    <div class="content">
+      <div class="list">{{items}}</div>
+      <p>
+        <a href="{{remove_url}}" class="btn">Remove</a>
+        <a href="{{dispose_url}}" class="btn">Create Disposal Record</a>
+        <a href="{{details_url}}" class="btn">View Details</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

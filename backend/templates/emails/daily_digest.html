@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Summary</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      background-color: #2563eb;
+      color: #ffffff;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .date {
+      margin-top: 8px;
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 8px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-card {
+      background-color: #f9fafb;
+      padding: 16px;
+      border-radius: 6px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2563eb;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 8px;
+      background-color: #f3f4f6;
+      color: #4b5563;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    td {
+      padding: 8px;
+      border-bottom: 1px solid #e5e7eb;
+      color: #374151;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .text-right {
+      text-align: right;
+    }
+
+    .text-red {
+      color: #dc2626;
+      font-weight: 600;
+    }
+
+    .footer {
+      background-color: #f9fafb;
+      padding: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .alert-box {
+      background-color: #fee2e2;
+      border-left: 4px solid #dc2626;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+    }
+
+    .alert-title {
+      color: #991b1b;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .alert-desc {
+      color: #b91c1c;
+      font-size: 13px;
+      margin: 4px 0 0 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Stock Wisely Daily Summary</h1>
+      <div class="date">{{date}}</div>
+    </div>
+
+    <div class="content">
+      <!-- Sales Summary -->
+      <div class="section">
+        <div class="section-title">Today's Performance</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">Rs. {{today_revenue}}</span>
+            <span class="stat-label">Revenue</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">{{today_orders}}</span>
+            <span class="stat-label">Orders</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alerts Section (Pre-rendered) -->
+      {{alerts_section}}
+
+      <!-- Top Selling Products -->
+      <div class="section">
+        <div class="section-title">Top Selling Products</div>
+        <table cellpadding="0" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th class="text-right">Qty</th>
+              <th class="text-right">Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{top_products_rows}}
+          </tbody>
+        </table>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="{{action_url}}/dashboard" class="btn">Open Dashboard</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      &copy; 2026 Stock Wisely. All rights reserved.<br>
+      Automated daily report generated at {{generated_time}}
+    </div>
+  </div>
+</body>
+
+</html>

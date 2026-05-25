@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Due</title>
+<style>
+  .container{max-width:600px;margin:0 auto;font-family:Arial,sans-serif;color:#333}
+  .header{background:#10b981;color:#fff;padding:20px;text-align:center}
+  .content{background:#fff;border:1px solid #e5e7eb;border-top:none;padding:24px}
+  .btn{display:inline-block;background:#10b981;color:#fff;padding:12px 20px;text-decoration:none;border-radius:6px;margin-right:8px}
+  .meta{font-size:14px;color:#555}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Payment Due</h1>
+    </div>
+    <div class="content">
+      <p>Vendor: {{vendor}}</p>
+      <p class="meta">Invoice: {{invoice}} • Due Date: {{due_date}} • Amount: Rs. {{amount}}</p>
+      <p>
+        <a href="{{pay_url}}" class="btn">Pay Now</a>
+        <a href="{{invoice_url}}" class="btn">View Invoice</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+[
+  {
+    "table_name": "products",
+    "column_name": "id",
+    "data_type": "bigint"
+  },
+  {
+    "table_name": "products",
+    "column_name": "product_code",
+    "data_type": "text"
+  },
+  {
+    "table_name": "products",
+    "column_name": "description",
+    "data_type": "text"
+  },
+  {
+    "table_name": "products",
+    "column_name": "category",
+    "data_type": "text"
+  },
+  {
+    "table_name": "products",
+    "column_name": "is_active",
+    "data_type": "boolean"
+  },
+  {
+    "table_name": "products",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone"
+  },
+  {
+    "table_name": "products",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone"
+  },
+  {
+    "table_name": "products",
+    "column_name": "min_stock_level",
+    "data_type": "integer"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "id",
+    "data_type": "bigint"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "invoice_number",
+    "data_type": "text"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "customer_name",
+    "data_type": "text"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "sale_date",
+    "data_type": "timestamp without time zone"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "total_amount",
+    "data_type": "numeric"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "total_items",
+    "data_type": "integer"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "subtotal",
+    "data_type": "numeric"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "discount",
+    "data_type": "numeric"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "tax",
+    "data_type": "numeric"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "payment_method",
+    "data_type": "character varying"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "amount_paid",
+    "data_type": "numeric"
+  },
+  {
+    "table_name": "sales_master",
+    "column_name": "change_amount",
+    "data_type": "numeric"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "product_code",
+    "data_type": "text"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "description",
+    "data_type": "text"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "vat_pct",
+    "data_type": "double precision"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "inwards_qty",
+    "data_type": "double precision"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "inwards_amt",
+    "data_type": "double precision"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "outwards_qty",
+    "data_type": "double precision"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "outwards_amt",
+    "data_type": "double precision"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "balance_qty",
+    "data_type": "double precision"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "balance_amt",
+    "data_type": "double precision"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "last_cost",
+    "data_type": "double precision"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "source_file",
+    "data_type": "text"
+  },
+  {
+    "table_name": "stock_movements",
+    "column_name": "extracted_month",
+    "data_type": "double precision"
+  }
+]

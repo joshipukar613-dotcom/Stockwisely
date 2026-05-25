@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String    @id @default(uuid())
+  email             String    @unique
+  password          String?
+  firstName         String
+  lastName          String
+  businessName      String?
+  businessType      String?
+  phoneNumber       String?
+  isEmailVerified   Boolean   @default(false)
+  googleId          String?   @unique
+  avatar            String?
+  role              String    @default("SALES_CLERK")
+  mustChangePassword Boolean  @default(false)
+  createdBy         String?
+  resetToken        String?
+  resetTokenExpires DateTime?
+  accountStatus     String    @default("active")
+  isActive          Boolean   @default(true)
+  lastLogin         DateTime?
+  preferences       Json?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  verificationTokens VerificationToken[]
+  
+  @@index([email])
+  @@index([googleId])
+}
+
+model VerificationToken {
+  id         String            @id @default(uuid())
+  userId     String
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token      String            @unique
+  type       VerificationType
+  expiresAt  DateTime
+  used       Boolean           @default(false)
+  metadata   Json?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  
+  @@index([userId, type, used])
+  @@index([token])
+}
+
+enum VerificationType {
+  email_verification
+  password_reset
+  two_factor
+}
+
+// Optional: models mapping to new master-detail tables (existing tables created via SQL)
+model Product {
+  id           BigInt   @id @default(autoincrement()) @map("id")
+  productCode  String   @unique @map("product_code")
+  description  String?  @map("description")
+  category     String?  @map("category")
+  unit         String?  @map("unit")
+  basePrice    Decimal? @map("base_price")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @map("updated_at")
+
+  @@map("products")
+}
+
+model SalesMaster {
+  id            BigInt   @id @default(autoincrement()) @map("id")
+  invoiceNumber String   @unique @map("invoice_number")
+  customerName  String?  @map("customer_name")
+  saleDate      DateTime @default(now()) @map("sale_date")
+  totalAmount   Decimal  @default(0) @map("total_amount")
+  totalItems    Int      @default(0) @map("total_items")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @default(now()) @map("updated_at")
+
+  items         SalesItem[]
+
+  @@map("sales_master")
+}
+
+model SalesItem {
+  id           BigInt   @id @default(autoincrement()) @map("id")
+  saleId       BigInt   @map("sale_id")
+  productCode  String   @map("product_code")
+  productName  String?  @map("product_name")
+  quantity     Int      @map("quantity")
+  price        Decimal  @map("price")
+  amount       Decimal? @map("amount")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @map("updated_at")
+
+  sale         SalesMaster @relation(fields: [saleId], references: [id])
+
+  @@index([saleId])
+  @@map("sales_items")
+}
+
+model PurchaseMaster {
+  id            BigInt   @id @default(autoincrement()) @map("id")
+  invoiceNumber String   @unique @map("invoice_number")
+  vendorName    String?  @map("vendor_name")
+  purchaseDate  DateTime @default(now()) @map("purchase_date")
+  totalAmount   Decimal  @default(0) @map("total_amount")
+  totalItems    Int      @default(0) @map("total_items")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @default(now()) @map("updated_at")
+
+  items         PurchaseItem[]
+
+  @@map("purchase_master")
+}
+
+model PurchaseItem {
+  id           BigInt   @id @default(autoincrement()) @map("id")
+  purchaseId   BigInt   @map("purchase_id")
+  productCode  String   @map("product_code")
+  productName  String?  @map("product_name")
+  quantity     Int      @map("quantity")
+  price        Decimal  @map("price")
+  amount       Decimal? @map("amount")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @map("updated_at")
+
+  purchase     PurchaseMaster @relation(fields: [purchaseId], references: [id])
+
+  @@index([purchaseId])
+  @@map("purchase_items")
+}

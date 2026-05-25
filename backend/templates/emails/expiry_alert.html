@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products Expiring Soon</title>
+<style>
+  .container{max-width:800px;margin:0 auto;font-family:Arial,sans-serif;color:#333}
+  .header{background:#f59e0b;color:#fff;padding:20px;text-align:center}
+  .content{background:#fff;border:1px solid #e5e7eb;border-top:none;padding:24px}
+  .table{width:100%;border-collapse:collapse}
+  .table th,.table td{border:1px solid #e5e7eb;padding:8px;text-align:left;font-size:14px}
+  .btn{display:inline-block;background:#3b82f6;color:#fff;padding:10px 16px;text-decoration:none;border-radius:6px;margin-right:8px}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>{{count}} Products Expiring Soon</h1>
+    </div>
+    <div class="content">
+      <table class="table">
+        <thead><tr><th>Product</th><th>Batch</th><th>Expiry Date</th><th>Days Left</th><th>Stock</th></tr></thead>
+        <tbody>
+          {{rows}}
+        </tbody>
+      </table>
+      <p>
+        <a href="{{view_all_url}}" class="btn">View All</a>
+        <a href="{{download_url}}" class="btn">Download Report</a>
+        <a href="{{markdown_url}}" class="btn">Mark Down Prices</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

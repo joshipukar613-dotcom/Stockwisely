@@ -1,0 +1,163 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  /* Dark Theme */
+  --bg-dark: #0a0a0a;
+  --card-dark: #2a2a2a;
+  --text-dark: #ffffff;
+  --nav-dark-bg: #ffffff;
+  --nav-dark-text: #000000;
+  
+  /* Light Theme */
+  --bg-light: #ffffff;
+  --card-light: #ffffff;
+  --text-light: #000000;
+  --nav-light-bg: #000000;
+  --nav-light-text: #ffffff;
+  
+  /* Brand Colors */
+  --brand-primary: #4f46e5;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ==========================================
+   RESPONSIVE FIXES
+   ========================================== */
+
+/* Ensure the main content area doesn't overflow on mobile */
+@media (max-width: 1023px) {
+  /* Reset sidebar margin on mobile since sidebar is an overlay */
+  main {
+    margin-left: 0 !important;
+  }
+}
+
+/* Tables: make them scrollable on small screens */
+@media (max-width: 767px) {
+  /* Stack filter rows vertically on mobile */
+  .filter-row {
+    flex-direction: column;
+  }
+
+  /* Adjust heading sizes for mobile */
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Stats cards: stack vertically on mobile */
+  .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4,
+  .grid-cols-1.md\:grid-cols-3,
+  .grid-cols-1.md\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Make action buttons wrap properly */
+  .flex-wrap {
+    gap: 0.5rem !important;
+  }
+
+  /* Ensure modals are full-width on mobile */
+  .max-w-4xl {
+    max-width: 100% !important;
+  }
+
+  /* Reduce padding on mobile */
+  .p-6 {
+    padding: 1rem !important;
+  }
+
+  /* Reduce the gap between grid items on mobile */
+  .gap-6 {
+    gap: 1rem !important;
+  }
+
+  /* Make number inputs wider on mobile */
+  input[type="number"] {
+    min-width: 80px;
+  }
+}
+
+/* Small mobile adjustments (below 480px) */
+@media (max-width: 480px) {
+  /* Stack header buttons */
+  .flex.flex-wrap.items-center.gap-3 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .flex.flex-wrap.items-center.gap-3 button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Reduce padding further */
+  .container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  /* Table cells: reduce padding */
+  table th,
+  table td {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Fix number input leading zeros - prevent spinner from getting too small */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  height: auto;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-invoice, .printable-invoice * {
+    visibility: visible;
+  }
+  .printable-invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 20px;
+    background: white;
+    color: black;
+  }
+  /* Hide scrollbars and other UI elements */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  @page {
+    margin: 0;
+  }
+}
